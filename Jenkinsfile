@@ -27,7 +27,9 @@ pipeline {
         stage('Prepare Tags for Docker Images') {
             steps {
                 echo 'Preparing Tags for Docker Images'
-                sh ". ./scripts/tagdockers.sh"
+                script {
+                env.IMAGE_TAG_ALL_M="${ECR_REGISTRY}/${APP_REPO_NAME}"
+                }
             }
         }
     
