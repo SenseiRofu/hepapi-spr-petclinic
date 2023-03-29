@@ -59,7 +59,7 @@ pipeline {
                 sh 'eval $(minikube docker-env) && docker build -t myapp .'
                 sh "sed -i s/HELM_VERSION/${BUILD_NUMBER}/ petclinic_chart/Chart.yaml"
                 sh "helm repo add stable-petclinic s3://helm-hepapi/stable/myapp/"
-                sh "helm package k8s/petclinic_chart"
+                sh "helm package petclinic_chart"
                 sh "helm s3 push --force petclinic_chart-${BUILD_NUMBER}.tgz stable-petclinic"
                 sh "sleep 60"    
             }
