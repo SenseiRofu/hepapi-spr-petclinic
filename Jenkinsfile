@@ -7,6 +7,7 @@ pipeline {
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin" && aws sts get-caller-identity --query Account --output text', returnStdout:true).trim()
         AWS_REGION="us-east-1"
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+        ANS_KEYPAIR="petclinic-${APP_NAME}-dev-${BUILD_NUMBER}.key"
         
     }
     stages {
@@ -20,7 +21,7 @@ pipeline {
 
         stage('Build ECR repo') {
             steps {
-                
+
                 sh 'aws ecr describe-repositories --region ${AWS_REGION} --repository-name ${APP_REPO_NAME} || \
                 aws ecr create-repository \
                 --repository-name ${APP_REPO_NAME} \
