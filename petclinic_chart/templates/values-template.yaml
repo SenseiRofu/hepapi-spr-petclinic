@@ -1,0 +1,2 @@
+IMAGE_TAG_ALL_MC: "${IMAGE_TAG_ALL_M}"
+DNS_NAME: "senseirofu.link"
