@@ -13,3 +13,5 @@ COPY --from=build /app/${JAR_FILE} app.jar
 RUN chown -R javauser:javauser .
 USER javauser
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+

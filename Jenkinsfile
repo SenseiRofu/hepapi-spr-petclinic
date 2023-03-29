@@ -45,12 +45,7 @@ pipeline {
                 echo 'Pushing App Dev Images'
                 sh '. ./scripts/pushdockerimage.sh'
             }
-        }
-        stage('Minikube Start') {
-            steps {
-                sh 'minikube start'
-            }
-        }       
+        }     
         stage('Deploy App with Kubernetes'){
             steps {
                 echo 'Deploying App on Kubernetes Cluster'
