@@ -49,6 +49,7 @@ pipeline {
 
         stage('Minikube Start') {
             steps {
+                sh 'minikube delete'
                 sh 'minikube start'
             }
         }
