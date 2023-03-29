@@ -14,16 +14,13 @@ pipeline {
         stage('Prepare Tags for Docker Images') {
             steps {
                 echo 'Preparing Tags for Docker Images'
-                sh ". ./script/tagdockers.sh"
+                sh ". ./scripts/tagdockers.sh"
             }
         }
 
         stage('Build ECR repo') {
             steps {
-                sh 'PATH="$PATH:/usr/local/bin"'
-                sh 'APP_REPO_NAME="james/task"'
-                sh 'AWS_REGION="us-east-1"'
-
+                
                 sh 'aws ecr describe-repositories --region ${AWS_REGION} --repository-name ${APP_REPO_NAME} || \
                 aws ecr create-repository \
                 --repository-name ${APP_REPO_NAME} \
@@ -37,13 +34,13 @@ pipeline {
         stage('Package and Build Docker Images') {
             steps {
                 echo 'Building App Dev Images'
-                sh '. ./script/buildandpackage.sh'
+                sh '. ./scripts/buildandpackage.sh'
             }
         }
         stage('Push Docker Images') {
             steps {
                 echo 'Pushing App Dev Images'
-                sh '. ./script/pushdockerimage.sh'
+                sh '. ./scripts/pushdockerimage.sh'
             }
         }
         stage('Minikube Start') {
