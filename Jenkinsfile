@@ -46,10 +46,18 @@ pipeline {
                 sh '. ./scripts/pushdockerimage.sh'
             }
         }     
-        stage('Deploy App with Kubernetes'){
+
+        stage('Minikube Start') {
             steps {
-                echo 'Deploying App on Kubernetes Cluster'
-                sh 'kubectl apply -f ./petclinic_chart/templates/'
+                sh 'minikube start'
+            }
+        }
+
+        stage('Build and Deploy') {
+            steps {
+                sh 'eval $(minikube docker-env) && docker build -t myapp .'
+                sh 'kubectl apply -f mysql.yml'
+                sh 'kubectl apply -f petdep.yml'
             }
         }
     }
