@@ -1,2 +1,2 @@
-sudo docker build --force-rm -t "${IMAGE_TAG_ALL_M}" "${WORKSPACE}"
+docker build --force-rm -t "${IMAGE_TAG_ALL_M}" "${WORKSPACE}"
 
