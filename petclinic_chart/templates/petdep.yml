@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic
+spec:
+  selector:
+    matchLabels:
+      app: petclinic
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: petclinic
+    spec:
+      containers:
+        - name: petclinic
+          image: rofucloud/hepapipetclinic
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql:3306/petclinic?useSSL=false
+            - name: SPRING_DATASOURCE_USERNAME
+              value: petclinicuser
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: petclinicpassword
+          ports:
+            - containerPort: 8080
