@@ -1,0 +1,8 @@
+mykey = "penguin-key"
+ami = "ami-006e00d6ac75d2ebb"
+region = "us-east-1"
+instance_type = "t3a.medium"
+jenkins_server_secgr = "petclinicserver-secgr"
+jenkins-server-tag = "Jenkins Minikube Server of Petclinic"
+jenkins-profile = "petclinicserver-profile"
+jenkins-role = "petclinicserver-role"
