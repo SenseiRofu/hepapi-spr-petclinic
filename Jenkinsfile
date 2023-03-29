@@ -12,13 +12,6 @@ pipeline {
     }
     stages {
 
-        stage('Prepare Tags for Docker Images') {
-            steps {
-                echo 'Preparing Tags for Docker Images'
-                sh ". ./scripts/tagdockers.sh"
-            }
-        }
-
         stage('Build ECR repo') {
             steps {
 
@@ -30,7 +23,14 @@ pipeline {
                 --region ${AWS_REGION}'
                   
             }
-        }      
+        }  
+        stage('Prepare Tags for Docker Images') {
+            steps {
+                echo 'Preparing Tags for Docker Images'
+                sh ". ./scripts/tagdockers.sh"
+            }
+        }
+    
         
         stage('Package and Build Docker Images') {
             steps {
